@@ -1,0 +1,63 @@
+<html>
+  <style>
+    body{ 
+      font-size: 15pt;
+      font-family: arial;
+    }
+  </style>
+
+
+<body>
+
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul class=flashes>
+    {% for message in messages %}
+      <li>{{ message }}</li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+
+
+{% for order in orderlist %}
+    <li>{{ order.id_order }},{{ order.name_rest }} ,{{ order.name_food }},{{ order.cost }},{{ order.time }}
+	{% endfor %}
+
+
+
+<h2>Order Now!</h2>
+<form action="/order/<id>/addorder/" method="POST">
+	<select name="restaurant" >
+            {% for entry in rest %}
+			
+            <option value="{{ entry.id_rest }}" >{{ entry.name_rest }}</option>
+            {% endfor %}
+	</select>
+
+  <input type="text" name="food" placeholder="food" required>
+  
+  <input type="submit" value="Order">
+</form>
+
+<h2>Add to old order!</h2>
+<form action="/order/<id>/updateorder/" method="POST">
+	<select name="orderid" >
+            {% for entry in orderlist2 %}
+			
+            <option value="{{ entry.id_order }}" >{{ entry.id_order }}</option>
+            {% endfor %}
+	</select>
+  
+  <input type="text" name="food" placeholder="food" required>
+  <input type="text" name="restaurant" placeholder="restaurant" required>
+ 
+  <input type="submit" value="Order">
+</form>
+
+
+  
+</body>
+
+
+</html>

@@ -1,0 +1,43 @@
+
+<html>
+  <style>
+    body{ 
+      font-size: 15pt;
+      font-family: arial;
+    }
+  </style>
+
+
+<body>
+  
+
+
+
+
+
+<h2>See ingredients for food</h2>
+<form action="/ingredients/" method="POST">
+
+            <select name="name_food" >
+            {% for entry in entries %}
+			
+            <option value="{{ entry.name_food }}" >{{ entry.name_food }}</option>
+            {% endfor %}
+            </select>
+
+  <input type="submit" value="Ingredients">
+</form>
+
+<h2> See all food </h2>
+  {% for entry in entries2 %}
+    <p>{{ entry.name_food }}, with price {{ entry.price }} and with calorie {{ entry.calorie }}</p>
+  {% else %}
+    <li><em>Unbelievable.  No food here so far</em>
+  {% endfor %}
+
+</body>
+
+
+</html>
+
+

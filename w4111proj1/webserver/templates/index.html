@@ -1,0 +1,73 @@
+
+<html>
+  <style>
+    body{ 
+      font-size: 15pt;
+      font-family: arial;
+    }
+  </style>
+
+
+<body>
+  <h1>Welcome to Order System</h1>
+  
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul class=flashes>
+    {% for message in messages %}
+      <li>{{ message }}</li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+
+
+<p><a href="restaurants">All food you want are here!</a></p>
+<!--<p><a href="food">See All Food</a></p>
+<p><a href="consists_of">See How food composed</a></p>-->
+
+
+<h2>Login</h2>
+  {% if session['logged_in'] %}
+	<p> Welcome back, <strong> {{ session.name }} </strong>.</p>
+		<p><a href="profile/{{ session.id }}/">Update Profile</a></p>
+		{% if session.type=='normal' %}
+		<p><a href="order/{{ session.id }}">Order</a></p>
+		<p>You are a {{ session.type }} user, {{session.id}}. </p>
+		{% else %}
+		<p><a href="manage/{{ session.id }}">Manage</a></p>	
+		<p>You are an {{ session.type }} user, {{session.id}}. </p>
+		{% endif %}
+		<a  href="/logout/">Logout</a>
+	{% else %}
+	<form action="/login" method="POST">
+  <input type="username" name="username" placeholder="Username" required>
+  <input type="password" name="password" placeholder="Password" required>
+  <input type="submit" value="Log in">
+	</form>
+	{% endif %}
+
+	
+
+<h2>Register!</h2>
+<form action="/register/" method="POST">
+  <input type="username" name="username" placeholder="username" required>
+  <input type="password" name="password" placeholder="Password" required>
+  <input type="text" name="email" placeholder="email" required>
+  <input type="number" name="phone" placeholder="phone" required>
+  <select name="type"> 
+	<option value="normal">normal</option> 
+	<option value="admin">admin</option> 
+	</select>  
+  <input type="text" name="address" placeholder="address" required>
+  <input type="number" name="zip" placeholder="zip" required>
+  <input type="submit" value="Register">
+	</form>
+
+	
+
+
+</body>
+
+
+</html>

@@ -1,0 +1,13 @@
+
+{% block body %}
+  
+  <ul class=entries>
+  {% for entry in entries %}
+    <li>{{ entry.name_ingredient }}, which is {{ entry.type |safe }}
+
+  {% else %}
+    <li><em>Unbelievable.  No this food here so far</em>
+  {% endfor %}
+  </ul>
+  
+{% endblock %}

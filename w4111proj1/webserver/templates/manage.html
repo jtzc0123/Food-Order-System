@@ -1,0 +1,105 @@
+
+<html>
+  <style>
+    body{ 
+      font-size: 15pt;
+      font-family: arial;
+    }
+  </style>
+
+
+<body>
+<h3>Your restaurants</h3>
+{% for rest in profile %}
+
+<p> Your restaurant "{{ rest.id_rest }}:{{ rest.name_rest }}" is located at {{ rest.name_addr }}</p>
+
+{% endfor %}
+
+<h3>Your food</h3>
+{% for item in food %}
+
+<p> The restaurant "{{ item.name_rest }}" has "{{ item.name_food }}" </p>
+
+{% endfor %}
+
+
+
+<h3>Your orders</h3>
+{% for sold in order %}
+
+<p> The food "{{ sold.name_food }}" from "{{ sold.name_rest }}" was sold  at {{ sold.time }} with sellid {{ sold.id_order }}. Please connect {{sold.name_user}} by {{sold.phone}}</p>
+
+{% endfor %}
+
+{% if profile2 %}
+
+<h2>Change restraunt name!</h2>
+<form action="/manage/update_rest/" method="POST">
+	<select name="id" >
+            {% for entry in profile2 %}
+			
+            <option value="{{ entry.id_rest }}" >{{ entry.id_rest }}</option>
+            {% endfor %}
+	</select>
+	
+
+  <input type="text" name="to" placeholder="to" required>
+  <input type="submit" value="Update">
+	</form>
+{% endif %}
+	
+<h2>Create a restaurant!</h2>
+<form action="/manage/<id>/rest_create/" method="POST">
+  <input type="username" name="name_rest" placeholder="name" required>
+  <input type="text" name="address" placeholder="address" required>
+  <input type="number" name="zip" placeholder="zip" required>
+  <input type="submit" value="Create">
+	</form>
+
+{% if profile2 %}	
+<h2>Delete a restaurant</h2>
+<form action="/manage/<id>/rest_delete/" method="POST">
+	<select name="id" >
+            {% for entry in profile2 %}
+			
+            <option value="{{ entry.id_rest }}" >{{ entry.id_rest }}</option>
+            {% endfor %}
+	</select>
+
+  <input type="submit" value="Delete">
+	</form>
+{% endif %}
+
+{% if profile2 %}		
+<h2>Add a food</h2>
+<form action="/manage/<id>/food_add/" method="POST">
+  <input type="text" name="name_food" placeholder="food" required>
+  <select name="id_rest" >
+            {% for entry in profile2 %}
+			
+            <option value="{{ entry.id_rest }}" >{{ entry.id_rest }}</option>
+            {% endfor %}
+	</select>
+  <input type="number" name="price" placeholder="price" required>
+  <input type="submit" value="Add">
+	</form>
+{% endif %}	
+{% if profile2 %}		
+<h2>Delete a food</h2>
+<form action="/manage/<id>/food_delete/" method="POST">
+  <input type="text" name="name_food" placeholder="food" required>
+  <select name="id_rest" >
+            {% for entry in profile2 %}
+			
+            <option value="{{ entry.id_rest }}" >{{ entry.id_rest }}</option>
+            {% endfor %}
+	</select>
+  <input type="submit" value="Delete">
+	</form>
+{% endif %}
+  
+</body>
+
+
+</html>

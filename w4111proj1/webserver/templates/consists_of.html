@@ -1,0 +1,11 @@
+{% block body %}
+  <ul class=entries>
+  {% for entry in entries %}
+
+    <li><h3>{{ entry.name_food }}</h3>{{entry.name_ingredient|safe }}, which is {{entry.type|safe }}
+
+  {% else %}
+    <li><em>Unbelievable.  No entries here so far</em>
+  {% endfor %}
+  </ul>
+{% endblock %}

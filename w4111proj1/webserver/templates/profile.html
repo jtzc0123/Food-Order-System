@@ -1,0 +1,56 @@
+
+<html>
+  <style>
+    body{ 
+      font-size: 15pt;
+      font-family: arial;
+    }
+  </style>
+
+
+<body>
+
+
+
+<p>{{profile.name_user}}</p>
+<p>{{profile.phone}}</p>
+<p>{{profile.email}}</p>
+{% for add in locates %}
+    <li>{{ add.name_addr }}, {{ add.zip }}
+	{% endfor %}
+
+
+
+<h2>Update Profile</h2>
+<form action="/profile/<id>/update/" method="POST">
+  <input type="username" name="name" placeholder="username" required>
+  <input type="text" name="email" placeholder="email" required>
+  <input type="number" name="phone" placeholder="phone" required>
+  <input type="submit" value="Update">
+	</form>
+<h2>Update Address</h2>
+<form action="/profile/<id>/addr_update/" method="POST">
+  <input type="text" name="oldaddress" placeholder="oldaddress" required>
+   <input type="text" name="newaddress" placeholder="newaddress" required>
+  <input type="number" name="newzip" placeholder="newzip" required>
+  <input type="submit" value="Update Address">
+	</form>
+<h2>Add Address</h2>
+<form action="/profile/<id>/addr_add/" method="POST">
+   <input type="text" name="newaddress" placeholder="newaddress" required>
+  <input type="number" name="newzip" placeholder="newzip" required>
+  <input type="submit" value="Add Address">
+	</form>
+<h2>Delete Address</h2>
+<form action="/profile/<id>/addr_delete/" method="POST">
+  <input type="text" name="oldaddress" placeholder="oldaddress" required>
+  <input type="submit" value="Delete Address">
+	</form>
+
+
+
+  
+</body>
+
+
+</html>

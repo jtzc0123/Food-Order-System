@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+{% block body %}
+
+
+<h2>See food for restaurant</h2>
+<form action="/food2/" method="POST">
+
+            <select name="id_rest" >
+            {% for entry in entries2 %}
+			
+            <option value="{{ entry.id_rest }}" >{{ entry.name_rest }}</option>
+            {% endfor %}
+            </select>
+
+  <input type="submit" value="Food">
+</form>
+
+  <ul class=entries>
+  {% for entry in entries %}
+    <li><h4>{{ entry.name_rest }}</h4>Address is {{ entry.name_addr|safe }}, open since {{entry.since}}
+  {% else %}
+    <li><em>Unbelievable.  No result here so far</em>
+  {% endfor %}
+  </ul>
+{% endblock %}
